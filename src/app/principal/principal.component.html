@@ -1,0 +1,101 @@
+<nav class="navbar navbar-dark bg-dark">
+    <h5 class="titulo">Desafio Elotech | Cadastro de Pessoas (Angular + Spring Boot)</h5>
+</nav>
+<div class="card_form">
+    <form action="">
+        <img src="assets/pessoa.png" alt="" />
+        <div class="page">
+            <div class="field field_v1">
+                <label for="nome" class="ha-screen-reader">Nome:</label>
+                <input type="text" class="field__input" name="nome" placeholder="Ex. João Silva"
+                    [(ngModel)]="pessoa.nome" />
+                <span class="field__label-wrap" aria-hidden="true">
+                    <span class="field__label">Nome completo</span>
+                </span>
+            </div>
+            <div class="field field_v2">
+                <label for="cpf" class="ha-screen-reader">CPF:</label>
+                <input type="text" class="field__input" name="cpf" placeholder="Ex: 538.422.290-54"
+                    [(ngModel)]="pessoa.cpf" />
+                <span class="field__label-wrap" aria-hidden="true">
+                    <span class="field__label">CPF</span>
+                </span>
+            </div>
+            <div class="field field_v3">
+                <label for="dataNascimento" class="ha-screen-reader">Data de Nascimento:</label>
+                <input type="date" class="field__input" name="dataNascimento" [(ngModel)]="pessoa.dataNascimento" />
+            </div>
+        </div>
+
+        <div *ngFor="let contato of pessoa.contatos; let i = index">
+            <div class="d-flex justify-content-center align-items-center" style="margin-top: 10px">
+                <div class="page card" style="width: 18rem; padding: 15px">
+                    <h3>Contato #{{ i + 1 }}</h3>
+                    <div class="field field_v1">
+                        <label for="contatos.nome" class="ha-screen-reader">Nome do Contato:</label>
+                        <input type="text" class="field__input" name="contatos.nome" [(ngModel)]="contato.nome"
+                            placeholder="Nome do Contato" />
+                        <span class="field__label-wrap" aria-hidden="true">
+                            <span class="field__label">Nome do Contato:</span>
+                        </span>
+                    </div>
+                    <div class="field field_v2">
+                        <label for="cpf" class="ha-screen-reader">Telefone:</label>
+                        <input type="text" class="field__input" name="contatos.telefone" [(ngModel)]="contato.telefone"
+                        placeholder="Telefone do Contato" />
+                        <span class="field__label-wrap" aria-hidden="true">
+                            <span class="field__label">Telefone</span>
+                        </span>
+                    </div>
+                    <div class="field field_v3">
+                        <label for="cpf" class="ha-screen-reader">Nome do Contato:</label>
+                        <input type="text" class="field__input" name="contatos.email" [(ngModel)]="contato.email"
+                        placeholder="Email do Contato" />
+                        <span class="field__label-wrap" aria-hidden="true">
+                            <span class="field__label">E-mail</span>
+                        </span>
+                    </div>
+                    <!-- <button class="btn btn-danger" (click)="cancelarContato()">Remover</button> -->
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-info" style="color: white; border-radius: 50%;" (click)="adicionarContato()"><i class="fa fa-plus"></i></button>
+        <br />
+
+        <input type="button" value="Cadastrar" *ngIf="btnCadastro" class="btn btn-primary" (click)="cadastrar()" />
+        <input type="button" value="Alterar" *ngIf="!btnCadastro" class="btn btn-warning" (click)="editar()" />
+        <input type="button" value="Remover" *ngIf="!btnCadastro" class="btn btn-danger" (click)="remover()" />
+        <input type="button" value="Cancelar" *ngIf="!btnCadastro" class="btn btn-secondary" (click)="cancelar()" />
+    </form>
+</div>
+
+<table class="table" *ngIf="tabela" style="background-color: aqua;">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Data de Nascimento</th>
+            <th>Selecionar</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let p of pessoas; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ p.nome }}</td>
+            <td>{{ p.cpf }}</td>
+            <td>{{ p.dataNascimento }}</td>
+            <td>
+                <button (click)="selecionarPessoa(i)" class="btn btn-success">
+                    Selecionar
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<nav class="navbar navbar-dark bg-dark">
+    <h5 class="titulo">Desafio Elotech | By: Gustavo de Souza</h5>
+</nav>
